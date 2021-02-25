@@ -1,6 +1,4 @@
 import createTask from './modules/tasks.js';
 import createProject from './modules/projects.js';
-let taskArray = [];
-let projectArray = [];
-console.log(taskArray);
-console.log(projectArray);
+import showProjectForm from './modules/dom.js';
+import addProject from './modules/dom.js';
