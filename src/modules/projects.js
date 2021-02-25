@@ -1,6 +1,6 @@
-function createProject (title, description, tasks ) {
+function createProject (title, description, dueDate, tasks ) {
     tasks = [];
-    return { title, description, tasks };
+    return { title, description, dueDate, tasks };
 };
 
 export default createProject;
