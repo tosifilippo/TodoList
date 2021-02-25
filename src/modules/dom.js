@@ -1,7 +1,7 @@
 import createProject from "./projects";
 
 let taskArray = [];
-let projectArray = [];
+let projectsArray = [];
 
 const showProjectFormButton = document.getElementById("show-project-form");
 const addProjectForm = document.getElementById("add-project-form");
@@ -16,8 +16,12 @@ addProjectButton.addEventListener("click", function addProject() {
     const projectDueDate = document.getElementById("project-due-date");
     if (projectTitle.value != "" && projectDueDate.value != "") {
     let newProject = createProject(projectTitle.value, projectDueDate.value);
-    projectArray.push(newProject);
+    projectsArray.push(newProject);
+    saveLocal();
     addProjectForm.hidden = true;
-    console.log(projectArray);
     };
 });
+
+function saveLocal() {
+    localStorage.setItem("projectsArray", JSON.stringify(projectsArray));
+};
