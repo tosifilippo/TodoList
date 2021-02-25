@@ -1,1 +1,1 @@
-console.log("ci siamo!");
+(()=>{"use strict";console.log([])})();
