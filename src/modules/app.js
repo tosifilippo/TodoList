@@ -24,11 +24,7 @@ addProjectButton.addEventListener("click", function addProject() {
     saveLocal();
     console.log(projectsArray);
     addProjectForm.hidden = true;
-    let projectDisplay = document.createElement("p");
-    projectDisplay.innerHTML = "Project: " + projectTitle.value + "<br>" + 
-    "Description: " + projectDescription.value + "<br>" +
-    "Due Date: " + projectDueDate.value;
-    projectsContainer.appendChild(projectDisplay);
+    populatePage();
     };
 });
 
@@ -42,12 +38,25 @@ function restoreLocal() {
 };
 
 function populatePage() {
+    projectsContainer.innerHTML = "";
     projectsArray.forEach(element => {
-        let projectDisplay = document.createElement("p");
-        projectDisplay.innerHTML = "Project: " + element.title + "<br>" + 
+        if (element != null) {
+        let projectDisplay = document.createElement("div");
+        let projectPara = document.createElement("p");
+        let deleteProjectButton = document.createElement("button");
+        projectPara.innerHTML = "Project: " + element.title + "<br>" + 
         "Description: " + element.description + "<br>" +
         "Due Date: " + element.dueDate;
-        projectsContainer.appendChild(projectDisplay);    
+        deleteProjectButton.innerText = "Delete Project";
+        deleteProjectButton.setAttribute("data-index", projectsArray.indexOf(element));
+        deleteProjectButton.addEventListener("click", function() {
+            delete projectsArray[deleteProjectButton.dataset.index];
+            saveLocal();
+            projectsContainer.removeChild(projectDisplay);
+        })
+        projectDisplay.append(projectPara, deleteProjectButton);
+        projectsContainer.appendChild(projectDisplay);
+        };    
     });
 };
 
