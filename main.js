@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log([]),console.log([])})();
+(()=>{"use strict";let e=[];const t=document.getElementById("show-project-form"),d=document.getElementById("add-project-form");t.addEventListener("click",(function(){d.hidden=!1})),document.getElementById("add-project").addEventListener("click",(function(){const t=document.getElementById("project-title"),n=document.getElementById("project-due-date");if(""!=t.value&&""!=n.value){let l=(c=t.value,o=n.value,{title:c,description:o,tasks:[]});e.push(l),d.hidden=!0,console.log(e)}var c,o}))})();
