@@ -56,7 +56,7 @@ function populatePage() {
             projectsContainer.removeChild(projectDisplay);
         });
         let addTaskButton = document.createElement("button");
-        addTaskButton.innerHTML = "Add Task";
+        addTaskButton.innerHTML = "Create Task";
         addTaskButton.addEventListener("click", function() {
             addTaskForm.hidden = false;
         });
