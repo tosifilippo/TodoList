@@ -11,6 +11,7 @@ const projectTitle = document.getElementById("project-title");
 const projectDescription = document.getElementById("project-description");
 const projectDueDate = document.getElementById("project-due-date");
 const projectsContainer = document.getElementById("projects-container");
+const addTaskForm = document.getElementById("add-task-form");
 
 showProjectFormButton.addEventListener("click", function showProjectForm() {
     addProjectForm.hidden = false;
@@ -53,8 +54,13 @@ function populatePage() {
             delete projectsArray[deleteProjectButton.dataset.index];
             saveLocal();
             projectsContainer.removeChild(projectDisplay);
-        })
-        projectDisplay.append(projectPara, deleteProjectButton);
+        });
+        let addTaskButton = document.createElement("button");
+        addTaskButton.innerHTML = "Add Task";
+        addTaskButton.addEventListener("click", function() {
+            addTaskForm.hidden = false;
+        });
+        projectDisplay.append(projectPara, addTaskButton, deleteProjectButton);
         projectsContainer.appendChild(projectDisplay);
         };    
     });

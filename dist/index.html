@@ -14,7 +14,23 @@
             <input type="text" id="project-description" placeholder="description">
             <input type="date" id="project-due-date">
         </form>
-        <button id="add-project">Add</button>
+        <button id="add-project">Add Project</button>
+    </div>
+    <div id="add-task-form" hidden>
+        <form>
+            <input type="text" id="task-title" placeholder="title">
+            <input type="text" id="task-description" placeholder="description">
+            <input type="date" id="task-due-date">
+            <label for="priority">Task priority:</label>
+            <select name="priority" id="task-priority">
+                <option value="Max">Max</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <input type="text" id="task-notes" placeholder="notes">
+        </form>
+        <button id="add-task">Add Task</button>
     </div>
     <div id="projects-container"></div>
     <script src="main.js"></script>
