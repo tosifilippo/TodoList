@@ -1,7 +1,6 @@
 import createProject from "./projects";
 import createTask from './tasks';
 
-let taskArray = [];
 let projectsArray = [];
 
 const showProjectFormButton = document.getElementById("show-project-form");
@@ -12,22 +11,38 @@ const projectDescription = document.getElementById("project-description");
 const projectDueDate = document.getElementById("project-due-date");
 const projectsContainer = document.getElementById("projects-container");
 const addTaskForm = document.getElementById("add-task-form");
+const createTaskButton = document.getElementById("add-task");
+const taskTitle = document.getElementById("task-title");
+const taskDescription = document.getElementById("task-description");
+const taskDueDate = document.getElementById("task-due-date");
+const taskPriority = document.getElementById("task-priority");
+const taskNotes = document.getElementById("task-notes");
 
 showProjectFormButton.addEventListener("click", function showProjectForm() {
     addProjectForm.hidden = false;
-    console.log(projectsArray);
 });
 
 addProjectButton.addEventListener("click", function addProject() {
-    if (projectTitle.value != "" && projectDueDate.value != "") {
+    if (projectTitle.value != "" && projectDescription.value != "" && projectDueDate.value != "") {
     let newProject = createProject(projectTitle.value, projectDescription.value, projectDueDate.value);
     projectsArray.push(newProject);
     saveLocal();
-    console.log(projectsArray);
     addProjectForm.hidden = true;
     populatePage();
     };
 });
+
+createTaskButton.addEventListener("click", function addTask() {
+    if (taskTitle.value != "" && taskDescription.value != "" && taskDueDate.value != "" && 
+    taskPriority.value != "" && taskNotes.value != "") {
+        let newTask = createTask(taskTitle.value, taskDescription.value, taskDueDate.value, taskPriority.value, taskNotes.value);
+        projectsArray[createTaskButton.dataset.index].tasks.push(newTask);
+        saveLocal();
+        addTaskForm.hidden = true;
+        populatePage();
+        console.log(projectsArray);
+    };
+});    
 
 function saveLocal() {
     localStorage.setItem("projectsArray", JSON.stringify(projectsArray));
@@ -55,12 +70,21 @@ function populatePage() {
             saveLocal();
             projectsContainer.removeChild(projectDisplay);
         });
-        let addTaskButton = document.createElement("button");
-        addTaskButton.innerHTML = "Create Task";
-        addTaskButton.addEventListener("click", function() {
+        let showTaskFormButton = document.createElement("button");
+        showTaskFormButton.innerHTML = "Create Task";
+        showTaskFormButton.addEventListener("click", function() {
             addTaskForm.hidden = false;
+            createTaskButton.setAttribute("data-index", projectsArray.indexOf(element));
         });
-        projectDisplay.append(projectPara, addTaskButton, deleteProjectButton);
+        let taskPara = document.createElement("p");
+        element.tasks.forEach(element => {
+            taskPara.innerHTML += "Task: " + element.title + "<br>" +
+            "Description: " + element.description  + "<br>" + 
+            "Due Date: " + element.dueDate  + "<br>" +
+            "Priority: " + element.priority + "<br>" + 
+            "Notes: " + element.notes + "<br><br>";
+        });
+        projectDisplay.append(projectPara, taskPara, showTaskFormButton, deleteProjectButton);
         projectsContainer.appendChild(projectDisplay);
         };    
     });
@@ -68,3 +92,4 @@ function populatePage() {
 
 restoreLocal();
 populatePage();
+console.log(projectsArray);
