@@ -76,7 +76,25 @@ function populatePage() {
             addTaskForm.hidden = false;
             createTaskButton.setAttribute("data-index", projectsArray.indexOf(project));
         });
-        let taskDisplay = document.createElement("div")
+        let taskDisplay = document.createElement("div");
+        taskDisplay.setAttribute("hidden", true);
+        let showTasksButton = document.createElement("button");
+        showTasksButton.addEventListener("click", function() {
+            if (taskDisplay.hidden) {
+                taskDisplay.hidden = false;
+                showTasksButton.innerHTML = "Hide Tasks";
+            } else {
+                taskDisplay.hidden = true;
+                showTasksButton.innerHTML = "Show Tasks";
+            }
+        });
+        showTasksButton.innerHTML = "Show Tasks";
+        function checkTasks() {
+            if (project.tasks.every(element => element === null)) {
+                showTasksButton.setAttribute("hidden", true);
+            };   
+        };
+        checkTasks();     
         project.tasks.forEach(task => {
             if (task != null) {
             let taskPara = document.createElement("p");
@@ -90,6 +108,7 @@ function populatePage() {
             deleteTaskButton.setAttribute("data-index", project.tasks.indexOf(task));
             deleteTaskButton.addEventListener("click", function() {
                 delete project.tasks[deleteTaskButton.dataset.index];
+                checkTasks();
                 saveLocal();
                 taskDisplay.removeChild(taskPara);
             });
@@ -97,7 +116,7 @@ function populatePage() {
             taskDisplay.append(taskPara);
             };
         });
-        projectDisplay.append(projectPara, taskDisplay, showTaskFormButton, deleteProjectButton);
+        projectDisplay.append(projectPara, taskDisplay, showTasksButton, showTaskFormButton, deleteProjectButton);
         projectsContainer.appendChild(projectDisplay);
         };    
     });
