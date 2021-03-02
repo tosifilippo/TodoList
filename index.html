@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>ToDo List</title>
     <link rel="stylesheet" href="styles/global-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" 
+    rel="stylesheet">
 </head>
 <body>
     <button id="show-project-form">Create Project</button>
@@ -15,6 +16,14 @@
             <input type="date" id="project-due-date">
         </form>
         <button id="add-project">Add Project</button>
+    </div>
+    <div id="edit-project-form" hidden>
+        <form>
+            <input type="text" id="edit-project-title" placeholder="title">
+            <input type="text" id="edit-project-description" placeholder="description">
+            <input type="date" id="edit-project-due-date">
+        </form>
+        <button id="edit-project">Save Project</button>
     </div>
     <div id="add-task-form" hidden>
         <form>
@@ -31,6 +40,22 @@
             <input type="text" id="task-notes" placeholder="notes">
         </form>
         <button id="add-task">Add Task</button>
+    </div>
+    <div id="edit-task-form" hidden>
+        <form>
+            <input type="text" id="edit-task-title" placeholder="title">
+            <input type="text" id="edit-task-description" placeholder="description">
+            <input type="date" id="edit-task-due-date">
+            <label for="priority">Task priority:</label>
+            <select name="priority" id="edit-task-priority">
+                <option value="Max">Max</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <input type="text" id="edit-task-notes" placeholder="notes">
+        </form>
+        <button id="edit-task">Save Task</button>
     </div>
     <div id="projects-container"></div>
     <script src="main.js"></script>
