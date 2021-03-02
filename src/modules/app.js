@@ -18,6 +18,11 @@ const taskDescription = document.getElementById("task-description");
 const taskDueDate = document.getElementById("task-due-date");
 const taskPriority = document.getElementById("task-priority");
 const taskNotes = document.getElementById("task-notes");
+const editProjectForm = document.getElementById("edit-project-form");
+const saveProjectButton = document.getElementById("edit-project");
+const editProjectTitle = document.getElementById("edit-project-title");
+const editProjectDescription = document.getElementById("edit-project-description");
+const editProjectDueDate = document.getElementById("edit-project-due-date");
 // event listeners for static buttons
 showProjectFormButton.addEventListener("click", function showProjectForm() {
     addProjectForm.hidden = false;
@@ -40,8 +45,16 @@ createTaskButton.addEventListener("click", function addTask() {
         saveLocal();
         addTaskForm.hidden = true;
         populatePage();
-        console.log(projectsArray);
     };
+});
+saveProjectButton.addEventListener("click", function editProject() {
+    projectsArray[saveProjectButton.dataset.index].title = editProjectTitle.value;
+    projectsArray[saveProjectButton.dataset.index].description = editProjectDescription.value;
+    projectsArray[saveProjectButton.dataset.index].dueDate = editProjectDueDate.value;
+    saveLocal();
+    editProjectForm.hidden = true;
+    populatePage();
+    console.log(projectsArray);
 });    
 // local storage
 function saveLocal() {
@@ -59,6 +72,7 @@ function populatePage() {
             // displaying projects on the page
             let projectDisplay = document.createElement("div");
             let projectPara = document.createElement("p");
+            // projectPara.setAttribute("contenteditable", true);
             let deleteProjectButton = document.createElement("button");
             projectPara.innerHTML = "Project: " + project.title + "<br>" + 
             "Description: " + project.description + "<br>" +
@@ -70,6 +84,17 @@ function populatePage() {
                 delete projectsArray[deleteProjectButton.dataset.index];
                 saveLocal();
                 projectsContainer.removeChild(projectDisplay);
+            });
+            // creating button to edit project
+            let editProjectButton = document.createElement("button");
+            editProjectButton.innerHTML = "Edit Project";
+            // edit project button listener
+            editProjectButton.addEventListener("click", function() {
+                editProjectForm.hidden = false;
+                saveProjectButton.setAttribute("data-index", projectsArray.indexOf(project));
+                editProjectTitle.value = project.title;
+                editProjectDescription.value = project.description;
+                editProjectDueDate.value = project.dueDate;
             });
             // creating button to prompt new task form
             let showTaskFormButton = document.createElement("button");
@@ -105,6 +130,7 @@ function populatePage() {
             project.tasks.forEach(task => {
                 if (task != null) {
                 let taskPara = document.createElement("p");
+                // taskPara.setAttribute("contenteditable", true);
                 let deleteTaskButton = document.createElement("button");
                 deleteTaskButton.innerHTML = "Delete Task";
                 taskPara.innerHTML += "<br><br>" + "Task: " + task.title + "<br>" +
@@ -121,12 +147,11 @@ function populatePage() {
                     taskDisplay.removeChild(taskPara);
                 });
                 // appending elements to their parents
-                taskPara.append(deleteTaskButton);
-                taskDisplay.append(taskPara);
+                taskDisplay.append(taskPara, deleteTaskButton);
                 };
             });
             projectDisplay.append(projectPara, taskDisplay, showTasksButton,
-                showTaskFormButton, deleteProjectButton);
+                showTaskFormButton, editProjectButton, deleteProjectButton);
             projectsContainer.appendChild(projectDisplay);
         };    
     });
