@@ -55,16 +55,16 @@ function restoreLocal() {
 
 function populatePage() {
     projectsContainer.innerHTML = "";
-    projectsArray.forEach(element => {
-        if (element != null) {
+    projectsArray.forEach(project => {
+        if (project != null) {
         let projectDisplay = document.createElement("div");
         let projectPara = document.createElement("p");
         let deleteProjectButton = document.createElement("button");
-        projectPara.innerHTML = "Project: " + element.title + "<br>" + 
-        "Description: " + element.description + "<br>" +
-        "Due Date: " + element.dueDate;
+        projectPara.innerHTML = "Project: " + project.title + "<br>" + 
+        "Description: " + project.description + "<br>" +
+        "Due Date: " + project.dueDate;
         deleteProjectButton.innerText = "Delete Project";
-        deleteProjectButton.setAttribute("data-index", projectsArray.indexOf(element));
+        deleteProjectButton.setAttribute("data-index", projectsArray.indexOf(project));
         deleteProjectButton.addEventListener("click", function() {
             delete projectsArray[deleteProjectButton.dataset.index];
             saveLocal();
@@ -74,17 +74,30 @@ function populatePage() {
         showTaskFormButton.innerHTML = "Create Task";
         showTaskFormButton.addEventListener("click", function() {
             addTaskForm.hidden = false;
-            createTaskButton.setAttribute("data-index", projectsArray.indexOf(element));
+            createTaskButton.setAttribute("data-index", projectsArray.indexOf(project));
         });
-        let taskPara = document.createElement("p");
-        element.tasks.forEach(element => {
-            taskPara.innerHTML += "Task: " + element.title + "<br>" +
-            "Description: " + element.description  + "<br>" + 
-            "Due Date: " + element.dueDate  + "<br>" +
-            "Priority: " + element.priority + "<br>" + 
-            "Notes: " + element.notes + "<br><br>";
+        let taskDisplay = document.createElement("div")
+        project.tasks.forEach(task => {
+            if (task != null) {
+            let taskPara = document.createElement("p");
+            let deleteTaskButton = document.createElement("button");
+            deleteTaskButton.innerHTML = "Delete Task";
+            taskPara.innerHTML += "<br><br>" + "Task: " + task.title + "<br>" +
+            "Description: " + task.description  + "<br>" + 
+            "Due Date: " + task.dueDate  + "<br>" +
+            "Priority: " + task.priority + "<br>" + 
+            "Notes: " + task.notes + "<br><br>";
+            deleteTaskButton.setAttribute("data-index", project.tasks.indexOf(task));
+            deleteTaskButton.addEventListener("click", function() {
+                delete project.tasks[deleteTaskButton.dataset.index];
+                saveLocal();
+                taskDisplay.removeChild(taskPara);
+            });
+            taskPara.append(deleteTaskButton);
+            taskDisplay.append(taskPara);
+            };
         });
-        projectDisplay.append(projectPara, taskPara, showTaskFormButton, deleteProjectButton);
+        projectDisplay.append(projectPara, taskDisplay, showTaskFormButton, deleteProjectButton);
         projectsContainer.appendChild(projectDisplay);
         };    
     });
