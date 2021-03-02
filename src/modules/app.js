@@ -23,6 +23,13 @@ const saveProjectButton = document.getElementById("edit-project");
 const editProjectTitle = document.getElementById("edit-project-title");
 const editProjectDescription = document.getElementById("edit-project-description");
 const editProjectDueDate = document.getElementById("edit-project-due-date");
+const editTaskForm = document.getElementById("edit-task-form");
+const saveTaskButton = document.getElementById("edit-task");
+const editTaskTitle = document.getElementById("edit-task-title");
+const editTaskDescription = document.getElementById("edit-task-description");
+const editTaskDueDate = document.getElementById("edit-task-due-date");
+const editTaskPriority = document.getElementById("edit-task-priority");
+const editTaskNotes = document.getElementById("edit-task-notes");
 // event listeners for static buttons
 showProjectFormButton.addEventListener("click", function showProjectForm() {
     addProjectForm.hidden = false;
@@ -54,8 +61,22 @@ saveProjectButton.addEventListener("click", function editProject() {
     saveLocal();
     editProjectForm.hidden = true;
     populatePage();
-    console.log(projectsArray);
-});    
+});
+saveTaskButton.addEventListener("click", function editTask() {
+    projectsArray[saveTaskButton.dataset.projectindex].
+    tasks[saveTaskButton.dataset.taskindex].title = editTaskTitle.value;
+    projectsArray[saveTaskButton.dataset.projectindex].
+    tasks[saveTaskButton.dataset.taskindex].description = editTaskDescription.value;
+    projectsArray[saveTaskButton.dataset.projectindex].
+    tasks[saveTaskButton.dataset.taskindex].dueDate = editTaskDueDate.value;
+    projectsArray[saveTaskButton.dataset.projectindex].
+    tasks[saveTaskButton.dataset.taskindex].priority = editTaskPriority.value;
+    projectsArray[saveTaskButton.dataset.projectindex].
+    tasks[saveTaskButton.dataset.taskindex].notes = editTaskNotes.value;
+    saveLocal();
+    editTaskForm.hidden = true;
+    populatePage();        
+});
 // local storage
 function saveLocal() {
     localStorage.setItem("projectsArray", JSON.stringify(projectsArray));
@@ -72,7 +93,6 @@ function populatePage() {
             // displaying projects on the page
             let projectDisplay = document.createElement("div");
             let projectPara = document.createElement("p");
-            // projectPara.setAttribute("contenteditable", true);
             let deleteProjectButton = document.createElement("button");
             projectPara.innerHTML = "Project: " + project.title + "<br>" + 
             "Description: " + project.description + "<br>" +
@@ -130,9 +150,10 @@ function populatePage() {
             project.tasks.forEach(task => {
                 if (task != null) {
                 let taskPara = document.createElement("p");
-                // taskPara.setAttribute("contenteditable", true);
                 let deleteTaskButton = document.createElement("button");
                 deleteTaskButton.innerHTML = "Delete Task";
+                let editTaskButton = document.createElement("button");
+                editTaskButton.innerHTML = "Edit Task";
                 taskPara.innerHTML += "<br><br>" + "Task: " + task.title + "<br>" +
                 "Description: " + task.description  + "<br>" + 
                 "Due Date: " + task.dueDate  + "<br>" +
@@ -146,8 +167,19 @@ function populatePage() {
                     saveLocal();
                     taskDisplay.removeChild(taskPara);
                 });
+                // edit task button listener
+                editTaskButton.addEventListener("click", function() {
+                    editTaskForm.hidden = false;
+                    saveTaskButton.setAttribute("data-projectindex", projectsArray.indexOf(project));
+                    saveTaskButton.setAttribute("data-taskindex", project.tasks.indexOf(task));
+                    editTaskTitle.value = task.title;
+                    editTaskDescription.value = task.description;
+                    editTaskDueDate.value = task.dueDate;
+                    editTaskPriority.value = task.priority;
+                    editTaskNotes.value = task.notes; 
+                })
                 // appending elements to their parents
-                taskDisplay.append(taskPara, deleteTaskButton);
+                taskDisplay.append(taskPara, editTaskButton, deleteTaskButton);
                 };
             });
             projectDisplay.append(projectPara, taskDisplay, showTasksButton,
