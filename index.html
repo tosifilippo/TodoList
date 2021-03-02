@@ -16,6 +16,7 @@
             <input type="date" id="project-due-date">
         </form>
         <button id="add-project">Add Project</button>
+        <button id="x-project-form">X</button>
     </div>
     <div id="edit-project-form" hidden>
         <form>
@@ -24,6 +25,7 @@
             <input type="date" id="edit-project-due-date">
         </form>
         <button id="edit-project">Save Project</button>
+        <button id="x-edit-project">X</button>
     </div>
     <div id="add-task-form" hidden>
         <form>
@@ -32,6 +34,7 @@
             <input type="date" id="task-due-date">
             <label for="priority">Task priority:</label>
             <select name="priority" id="task-priority">
+                <option disabled selected value> -- select priority -- </option>
                 <option value="Max">Max</option>
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
@@ -40,6 +43,7 @@
             <input type="text" id="task-notes" placeholder="notes">
         </form>
         <button id="add-task">Add Task</button>
+        <button id="x-task-form">X</button>
     </div>
     <div id="edit-task-form" hidden>
         <form>
@@ -48,6 +52,7 @@
             <input type="date" id="edit-task-due-date">
             <label for="priority">Task priority:</label>
             <select name="priority" id="edit-task-priority">
+                <option disabled selected value> -- select priority -- </option>
                 <option value="Max">Max</option>
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
@@ -56,6 +61,7 @@
             <input type="text" id="edit-task-notes" placeholder="notes">
         </form>
         <button id="edit-task">Save Task</button>
+        <button id="x-edit-task">X</button>
     </div>
     <div id="projects-container"></div>
     <script src="main.js"></script>
