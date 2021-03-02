@@ -30,10 +30,16 @@ const editTaskDescription = document.getElementById("edit-task-description");
 const editTaskDueDate = document.getElementById("edit-task-due-date");
 const editTaskPriority = document.getElementById("edit-task-priority");
 const editTaskNotes = document.getElementById("edit-task-notes");
+const xProjectForm = document.getElementById("x-project-form");
+const xEditProject = document.getElementById("x-edit-project");
+const xTaskForm = document.getElementById("x-task-form");
+const xEditTask = document.getElementById("x-edit-task");
 // event listeners for static buttons
+// shows project form
 showProjectFormButton.addEventListener("click", function showProjectForm() {
     addProjectForm.hidden = false;
 });
+// creates project
 addProjectButton.addEventListener("click", function addProject() {
     if (projectTitle.value != "" && projectDescription.value != "" && projectDueDate.value != "") {
     let newProject = createProject(projectTitle.value, projectDescription.value, projectDueDate.value);
@@ -43,6 +49,7 @@ addProjectButton.addEventListener("click", function addProject() {
     populatePage();
     };
 });
+// creates task
 createTaskButton.addEventListener("click", function addTask() {
     if (taskTitle.value != "" && taskDescription.value != "" && taskDueDate.value != "" && 
     taskPriority.value != "" && taskNotes.value != "") {
@@ -54,6 +61,7 @@ createTaskButton.addEventListener("click", function addTask() {
         populatePage();
     };
 });
+// saves project edit
 saveProjectButton.addEventListener("click", function editProject() {
     projectsArray[saveProjectButton.dataset.index].title = editProjectTitle.value;
     projectsArray[saveProjectButton.dataset.index].description = editProjectDescription.value;
@@ -62,6 +70,7 @@ saveProjectButton.addEventListener("click", function editProject() {
     editProjectForm.hidden = true;
     populatePage();
 });
+// saves task edit
 saveTaskButton.addEventListener("click", function editTask() {
     projectsArray[saveTaskButton.dataset.projectindex].
     tasks[saveTaskButton.dataset.taskindex].title = editTaskTitle.value;
@@ -76,6 +85,30 @@ saveTaskButton.addEventListener("click", function editTask() {
     saveLocal();
     editTaskForm.hidden = true;
     populatePage();        
+});
+// hides project form
+xProjectForm.addEventListener("click", function hideProjectForm() {
+    addProjectForm.hidden = true;
+    projectTitle.value = "";
+    projectDescription.value = "";
+    projectDueDate.value = "";
+});
+// hides edit project form
+xEditProject.addEventListener("click", function hideEditProject() {
+    editProjectForm.hidden = true;
+});
+// hides task form
+xTaskForm.addEventListener("click", function hideTaskForm() {
+    addTaskForm.hidden = true;
+    taskDescription.value = "";
+    taskDueDate.value = "";
+    taskNotes.value = "";
+    taskPriority.value = "";
+    taskTitle.value = "";
+});
+// hide edit task form
+xEditTask.addEventListener("click", function hideEditTask() {
+    editTaskForm.hidden = true;
 });
 // local storage
 function saveLocal() {
