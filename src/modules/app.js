@@ -69,7 +69,7 @@ saveProjectButton.addEventListener("click", function editProject() {
     projectsArray[saveProjectButton.dataset.index].dueDate = editProjectDueDate.value;
     saveLocal();
     editProjectForm.hidden = true;
-    populatePage();
+    // populatePage();
 });
 // saves task edit
 saveTaskButton.addEventListener("click", function editTask() {
@@ -121,7 +121,7 @@ function restoreLocal() {
 };
 // DOM manipulation
 function populatePage() {
-    projectsContainer.innerHTML = "";
+    // projectsContainer.innerHTML = "";
     projectsArray.forEach(project => {
         if (project != null) {
             // creating sidebar content
@@ -139,9 +139,10 @@ function populatePage() {
             // displaying projects on the page
             let projectDisplay = document.createElement("div");
             projectDisplay.setAttribute("hidden", true);
+            projectDisplay.setAttribute("class", "project-display")
             let projectPara = document.createElement("p");
             let deleteProjectButton = document.createElement("button");
-            projectPara.innerHTML = "Project: " + project.title + "<br>" + 
+            projectPara.innerHTML = "<br>Project: " + project.title + "<br>" + 
             "Description: " + project.description + "<br>" +
             "Due Date: " + project.dueDate;
             deleteProjectButton.innerText = "Delete Project";
@@ -151,6 +152,7 @@ function populatePage() {
                 delete projectsArray[deleteProjectButton.dataset.index];
                 saveLocal();
                 projectsContainer.removeChild(projectDisplay);
+                sidebar.removeChild(projectSidebar);
             });
             // creating button to edit project
             let editProjectButton = document.createElement("button");
@@ -165,7 +167,7 @@ function populatePage() {
             });
             // creating button to prompt new task form
             let showTaskFormButton = document.createElement("button");
-            showTaskFormButton.innerHTML = "Create Task";
+            showTaskFormButton.innerHTML = "Add Task";
             showTaskFormButton.addEventListener("click", function() {
                 addTaskForm.hidden = false;
                 createTaskButton.setAttribute("data-index", projectsArray.indexOf(project));
@@ -201,11 +203,11 @@ function populatePage() {
                 deleteTaskButton.innerHTML = "Delete Task";
                 let editTaskButton = document.createElement("button");
                 editTaskButton.innerHTML = "Edit Task";
-                taskPara.innerHTML += "<br><br>" + "Task: " + task.title + "<br>" +
+                taskPara.innerHTML += "<br>Task: " + task.title + "<br>" +
                 "Description: " + task.description  + "<br>" + 
                 "Due Date: " + task.dueDate  + "<br>" +
                 "Priority: " + task.priority + "<br>" + 
-                "Notes: " + task.notes + "<br><br>";
+                "Notes: " + task.notes + "<br>";
                 deleteTaskButton.setAttribute("data-index", project.tasks.indexOf(task));
                 // delete task button listener
                 deleteTaskButton.addEventListener("click", function() {
@@ -226,7 +228,8 @@ function populatePage() {
                     editTaskNotes.value = task.notes; 
                 })
                 // appending elements to their parents
-                taskDisplay.append(taskPara, editTaskButton, deleteTaskButton);
+                taskPara.append(editTaskButton, deleteTaskButton);
+                taskDisplay.append(taskPara);
                 };
             });
             projectDisplay.append(projectPara, taskDisplay, showTasksButton,
