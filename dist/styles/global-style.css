@@ -1,14 +1,30 @@
+html {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 600;
+    font-size: x-large;
+}
+
 header {
     text-align: center;
 }
 
+h1 {
+    font-size: 400%;
+}
+
 .form {
-display: flex;
-position: absolute;
-top: 50%;
-left: 50%;
--ms-transform: translate(-50%, -50%);
-transform: translate(-50%, -50%);
+    display: grid;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: azure;
+    width: 40%;
+    height: 40%;
+    border: 5px solid;
+    padding: 5%;
+    gap: 5%;
 }
 
 .form-container {
@@ -21,4 +37,30 @@ transform: translate(-50%, -50%);
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
     z-index: 2;
+}
+
+input {
+    text-align: center;
+}
+
+select {
+    text-align-last: center;
+}
+
+.save-button {
+    width: 50%;
+    justify-self: center;
+    background: #b3ff99;
+}
+
+.cancel-button {
+    justify-self: center;
+    width: 50%;
+    background-color: #ff704d;
+}
+
+button {
+    font-family: 'Amatic SC', cursive;
+    font-size: x-large;
+    font-weight: 600;
 }
