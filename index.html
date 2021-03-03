@@ -16,7 +16,7 @@
             <input type="text" id="project-description" placeholder="description">
             <input type="date" id="project-due-date">
             <button id="add-project" class="save-button">Save Project</button>
-            <button id="x-project-form" class="cancel-button">Cancel</button>
+            <button id="x-project-form" type="button" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="edit-project-form" class="form-container" hidden>
@@ -25,7 +25,7 @@
             <input type="text" id="edit-project-description" placeholder="description">
             <input type="date" id="edit-project-due-date">
             <button id="edit-project" class="save-button">Save Project</button>
-            <button id="x-edit-project" class="cancel-button">Cancel</button>
+            <button id="x-edit-project" type="button" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="add-task-form" class="form-container" hidden>
@@ -42,7 +42,7 @@
             </select>
             <input type="text" id="task-notes" placeholder="notes">
             <button id="add-task" class="save-button">Save Task</button>
-            <button id="x-task-form" class="cancel-button">Cancel</button>
+            <button id="x-task-form" type="button" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="edit-task-form" class="form-container" hidden>
@@ -59,11 +59,11 @@
             </select>
             <input type="text" id="edit-task-notes" placeholder="notes">
             <button id="edit-task" class="save-button">Save Task</button>
-            <button id="x-edit-task" class="cancel-button">Cancel</button>
+            <button id="x-edit-task" type="button" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="sidebar">
-        <button id="show-project-form">Create Project</button>
+        <button id="show-project-form">Add Project</button>
     </div>
     <div id="projects-container"></div>
     <script src="main.js"></script>

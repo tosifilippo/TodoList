@@ -61,18 +61,26 @@ select {
     width: 50%;
     justify-self: center;
     background: #b3ff99;
+    border-radius: 50%;
 }
 
 .cancel-button {
     justify-self: center;
     width: 50%;
     background-color: #ff704d;
+    border-radius: 50%;
 }
 
 button {
     font-family: 'Amatic SC', cursive;
     font-size: x-large;
     font-weight: 600;
+    margin-bottom: 5%;
+    cursor: pointer;
+    background: transparent;
+    border: 3px solid grey;
+    border-radius: 20%;
+    margin: 1%;
 }
 
 #sidebar {
@@ -87,13 +95,35 @@ button {
 }
 
 .sidebar-button {
-    width: 100%;
+    width: 80%;
     height: 10%;
     background: transparent;
     color: white;
     margin-top: 10%;
+    border: 5px solid;
+    border-radius: 50%;
 }
 
 #show-project-form {
     margin-top: 10%;
+    width: 80%;
+    height: 10%;
+    background: transparent;
+    border: 5px solid;
+    border-radius: 50%;
+}
+
+#projects-container {
+    text-align: center;
+}
+
+p {
+    margin: 0;
+}
+
+.project-display {
+    border: 1px solid;
+    border-color: grey;
+    overflow: hidden;
+    background: azure;
 }
