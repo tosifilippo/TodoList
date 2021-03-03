@@ -8,27 +8,30 @@
     rel="stylesheet">
 </head>
 <body>
-    <button id="show-project-form">Create Project</button>
-    <div id="add-project-form" hidden>
-        <form>
+    <header>
+        <h1>Your Task Manager</h1>
+        <button id="show-project-form">Create Project</button>
+    </header>
+    <div id="add-project-form" class="form-container" hidden>
+        <form class="form">
             <input type="text" id="project-title" placeholder="title">
             <input type="text" id="project-description" placeholder="description">
             <input type="date" id="project-due-date">
+            <button id="add-project">Add Project</button>
+            <button id="x-project-form">X</button>
         </form>
-        <button id="add-project">Add Project</button>
-        <button id="x-project-form">X</button>
     </div>
-    <div id="edit-project-form" hidden>
-        <form>
+    <div id="edit-project-form" class="form-container" hidden>
+        <form class="form">
             <input type="text" id="edit-project-title" placeholder="title">
             <input type="text" id="edit-project-description" placeholder="description">
             <input type="date" id="edit-project-due-date">
+            <button id="edit-project">Save Project</button>
+            <button id="x-edit-project">X</button>
         </form>
-        <button id="edit-project">Save Project</button>
-        <button id="x-edit-project">X</button>
     </div>
-    <div id="add-task-form" hidden>
-        <form>
+    <div id="add-task-form" class="form-container" hidden>
+        <form class="form">
             <input type="text" id="task-title" placeholder="title">
             <input type="text" id="task-description" placeholder="description">
             <input type="date" id="task-due-date">
@@ -41,12 +44,12 @@
                 <option value="Low">Low</option>
             </select>
             <input type="text" id="task-notes" placeholder="notes">
+            <button id="add-task">Add Task</button>
+            <button id="x-task-form">X</button>
         </form>
-        <button id="add-task">Add Task</button>
-        <button id="x-task-form">X</button>
     </div>
-    <div id="edit-task-form" hidden>
-        <form>
+    <div id="edit-task-form" class="form-container" hidden>
+        <form class="form">
             <input type="text" id="edit-task-title" placeholder="title">
             <input type="text" id="edit-task-description" placeholder="description">
             <input type="date" id="edit-task-due-date">
@@ -59,9 +62,9 @@
                 <option value="Low">Low</option>
             </select>
             <input type="text" id="edit-task-notes" placeholder="notes">
+            <button id="edit-task">Save Task</button>
+            <button id="x-edit-task">X</button>
         </form>
-        <button id="edit-task">Save Task</button>
-        <button id="x-edit-task">X</button>
     </div>
     <div id="projects-container"></div>
     <script src="main.js"></script>
