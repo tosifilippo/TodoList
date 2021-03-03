@@ -34,6 +34,7 @@ const xProjectForm = document.getElementById("x-project-form");
 const xEditProject = document.getElementById("x-edit-project");
 const xTaskForm = document.getElementById("x-task-form");
 const xEditTask = document.getElementById("x-edit-task");
+const sidebar = document.getElementById("sidebar");
 // event listeners for static buttons
 // shows project form
 showProjectFormButton.addEventListener("click", function showProjectForm() {
@@ -123,8 +124,21 @@ function populatePage() {
     projectsContainer.innerHTML = "";
     projectsArray.forEach(project => {
         if (project != null) {
+            // creating sidebar content
+            let projectSidebar = document.createElement("button");
+            projectSidebar.innerHTML = project.title;
+            projectSidebar.classList.add("sidebar-button");
+            // sidebar listener
+            projectSidebar.addEventListener("click", function() {
+                if (projectDisplay.hidden) {
+                projectDisplay.hidden = false;
+                } else {
+                    projectDisplay.hidden = true;
+                }
+            });
             // displaying projects on the page
             let projectDisplay = document.createElement("div");
+            projectDisplay.setAttribute("hidden", true);
             let projectPara = document.createElement("p");
             let deleteProjectButton = document.createElement("button");
             projectPara.innerHTML = "Project: " + project.title + "<br>" + 
@@ -218,6 +232,7 @@ function populatePage() {
             projectDisplay.append(projectPara, taskDisplay, showTasksButton,
                 showTaskFormButton, editProjectButton, deleteProjectButton);
             projectsContainer.appendChild(projectDisplay);
+            sidebar.appendChild(projectSidebar);
         };    
     });
 };
