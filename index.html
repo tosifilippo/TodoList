@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>ToDo List</title>
     <link rel="stylesheet" href="styles/global-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" 
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -17,8 +16,8 @@
             <input type="text" id="project-title" placeholder="title">
             <input type="text" id="project-description" placeholder="description">
             <input type="date" id="project-due-date">
-            <button id="add-project">Add Project</button>
-            <button id="x-project-form">X</button>
+            <button id="add-project" class="save-button">Save Project</button>
+            <button id="x-project-form" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="edit-project-form" class="form-container" hidden>
@@ -26,8 +25,8 @@
             <input type="text" id="edit-project-title" placeholder="title">
             <input type="text" id="edit-project-description" placeholder="description">
             <input type="date" id="edit-project-due-date">
-            <button id="edit-project">Save Project</button>
-            <button id="x-edit-project">X</button>
+            <button id="edit-project" class="save-button">Save Project</button>
+            <button id="x-edit-project" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="add-task-form" class="form-container" hidden>
@@ -35,7 +34,6 @@
             <input type="text" id="task-title" placeholder="title">
             <input type="text" id="task-description" placeholder="description">
             <input type="date" id="task-due-date">
-            <label for="priority">Task priority:</label>
             <select name="priority" id="task-priority">
                 <option disabled selected value> -- select priority -- </option>
                 <option value="Max">Max</option>
@@ -44,8 +42,8 @@
                 <option value="Low">Low</option>
             </select>
             <input type="text" id="task-notes" placeholder="notes">
-            <button id="add-task">Add Task</button>
-            <button id="x-task-form">X</button>
+            <button id="add-task" class="save-button">Save Task</button>
+            <button id="x-task-form" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="edit-task-form" class="form-container" hidden>
@@ -53,7 +51,6 @@
             <input type="text" id="edit-task-title" placeholder="title">
             <input type="text" id="edit-task-description" placeholder="description">
             <input type="date" id="edit-task-due-date">
-            <label for="priority">Task priority:</label>
             <select name="priority" id="edit-task-priority">
                 <option disabled selected value> -- select priority -- </option>
                 <option value="Max">Max</option>
@@ -62,8 +59,8 @@
                 <option value="Low">Low</option>
             </select>
             <input type="text" id="edit-task-notes" placeholder="notes">
-            <button id="edit-task">Save Task</button>
-            <button id="x-edit-task">X</button>
+            <button id="edit-task" class="save-button">Save Task</button>
+            <button id="x-edit-task" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="projects-container"></div>
