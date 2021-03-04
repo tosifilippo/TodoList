@@ -34,7 +34,7 @@ const xProjectForm = document.getElementById("x-project-form");
 const xEditProject = document.getElementById("x-edit-project");
 const xTaskForm = document.getElementById("x-task-form");
 const xEditTask = document.getElementById("x-edit-task");
-const sidebar = document.getElementById("sidebar");
+const sidebar = document.getElementById("sidebar-container");
 // event listeners for static buttons
 // shows project form
 showProjectFormButton.addEventListener("click", function showProjectForm() {
@@ -61,15 +61,6 @@ createTaskButton.addEventListener("click", function addTask() {
         addTaskForm.hidden = true;
         populatePage();
     };
-});
-// saves project edit
-saveProjectButton.addEventListener("click", function editProject() {
-    projectsArray[saveProjectButton.dataset.index].title = editProjectTitle.value;
-    projectsArray[saveProjectButton.dataset.index].description = editProjectDescription.value;
-    projectsArray[saveProjectButton.dataset.index].dueDate = editProjectDueDate.value;
-    saveLocal();
-    editProjectForm.hidden = true;
-    // populatePage();
 });
 // saves task edit
 saveTaskButton.addEventListener("click", function editTask() {
@@ -121,7 +112,8 @@ function restoreLocal() {
 };
 // DOM manipulation
 function populatePage() {
-    // projectsContainer.innerHTML = "";
+    projectsContainer.innerHTML = "";
+    sidebar.innerHTML = "";
     projectsArray.forEach(project => {
         if (project != null) {
             // creating sidebar content
@@ -139,12 +131,26 @@ function populatePage() {
             // displaying projects on the page
             let projectDisplay = document.createElement("div");
             projectDisplay.setAttribute("hidden", true);
-            projectDisplay.setAttribute("class", "project-display")
+            projectDisplay.setAttribute("data-index", projectsArray.indexOf(project));
+            projectDisplay.setAttribute("class", "project-display");
+            // saves project edit
+            saveProjectButton.addEventListener("click", function editProject() {
+                projectsArray[saveProjectButton.dataset.index].title = editProjectTitle.value;
+                projectsArray[saveProjectButton.dataset.index].description = editProjectDescription.value;
+                projectsArray[saveProjectButton.dataset.index].dueDate = editProjectDueDate.value;
+                saveLocal();
+                editProjectForm.hidden = true;
+                projectSidebar.innerHTML = project.title;
+                populatePara();
+            });            
             let projectPara = document.createElement("p");
             let deleteProjectButton = document.createElement("button");
+            function populatePara() {
             projectPara.innerHTML = "<br>Project: " + project.title + "<br>" + 
             "Description: " + project.description + "<br>" +
             "Due Date: " + project.dueDate;
+            };
+            populatePara();
             deleteProjectButton.innerText = "Delete Project";
             deleteProjectButton.setAttribute("data-index", projectsArray.indexOf(project));
             // delete project button listener
