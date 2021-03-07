@@ -1,6 +1,7 @@
 // imports
 import createProject from "./projects";
 import createTask from './tasks';
+import { parseISO, formatDistanceToNow } from 'date-fns';
 // creating array to store projects
 let projectsArray = [];
 // targeting html elements
@@ -145,7 +146,7 @@ function populatePage() {
             function populatePara() {
             projectPara.innerHTML = "<br>Project: " + project.title + "<br>" + 
             "Description: " + project.description + "<br>" +
-            "Due Date: " + project.dueDate;
+            "Due Date: " + formatDistanceToNow(parseISO(project.dueDate), {addSuffix : true});
             };
             populatePara();
             deleteProjectButton.innerText = "Delete Project";
