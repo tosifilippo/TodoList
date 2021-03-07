@@ -43,11 +43,16 @@ showProjectFormButton.addEventListener("click", function showProjectForm() {
 // creates project
 addProjectButton.addEventListener("click", function addProject() {
     if (projectTitle.value != "" && projectDescription.value != "" && projectDueDate.value != "") {
-    let newProject = createProject(projectTitle.value, projectDescription.value, projectDueDate.value);
-    projectsArray.push(newProject);
-    saveLocal();
-    addProjectForm.hidden = true;
-    populatePage();
+        let newProject = createProject(projectTitle.value, projectDescription.value, projectDueDate.value);
+        projectsArray.push(newProject);
+        saveLocal();
+        addProjectForm.hidden = true;
+        populatePage();
+        let projectNode = document.querySelectorAll(`[data-index="${projectsArray.length -1}"]`);
+        console.log(projectNode);
+        projectNode.forEach(element => {
+            element.hidden = false;
+        });
     };
 });
 // creates task
@@ -60,10 +65,10 @@ createTaskButton.addEventListener("click", function addTask() {
         saveLocal();
         addTaskForm.hidden = true;
         populatePage();
-        let node = document.querySelectorAll(`[data-index="${createTaskButton.dataset.index}"]`);
-        node.forEach(element => {
+        let taskNode = document.querySelectorAll(`[data-index="${createTaskButton.dataset.index}"]`);
+        taskNode.forEach(element => {
             element.hidden = false;
-        })  
+        });  
     };
 });
 // hides project form
