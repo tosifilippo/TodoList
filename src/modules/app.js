@@ -62,22 +62,6 @@ createTaskButton.addEventListener("click", function addTask() {
         populatePage();
     };
 });
-// saves task edit
-saveTaskButton.addEventListener("click", function editTask() {
-    projectsArray[saveTaskButton.dataset.projectindex].
-    tasks[saveTaskButton.dataset.taskindex].title = editTaskTitle.value;
-    projectsArray[saveTaskButton.dataset.projectindex].
-    tasks[saveTaskButton.dataset.taskindex].description = editTaskDescription.value;
-    projectsArray[saveTaskButton.dataset.projectindex].
-    tasks[saveTaskButton.dataset.taskindex].dueDate = editTaskDueDate.value;
-    projectsArray[saveTaskButton.dataset.projectindex].
-    tasks[saveTaskButton.dataset.taskindex].priority = editTaskPriority.value;
-    projectsArray[saveTaskButton.dataset.projectindex].
-    tasks[saveTaskButton.dataset.taskindex].notes = editTaskNotes.value;
-    saveLocal();
-    editTaskForm.hidden = true;
-    populatePage();        
-});
 // hides project form
 xProjectForm.addEventListener("click", function hideProjectForm() {
     addProjectForm.hidden = true;
@@ -204,16 +188,38 @@ function populatePage() {
             // looping through each project and displaying its tasks     
             project.tasks.forEach(task => {
                 if (task != null) {
+                // saves task edit
+                saveTaskButton.addEventListener("click", function editTask() {
+                    projectsArray[saveTaskButton.dataset.projectindex].
+                    tasks[saveTaskButton.dataset.taskindex].title = editTaskTitle.value;
+                    projectsArray[saveTaskButton.dataset.projectindex].
+                    tasks[saveTaskButton.dataset.taskindex].description = editTaskDescription.value;
+                    projectsArray[saveTaskButton.dataset.projectindex].
+                    tasks[saveTaskButton.dataset.taskindex].dueDate = editTaskDueDate.value;
+                    projectsArray[saveTaskButton.dataset.projectindex].
+                    tasks[saveTaskButton.dataset.taskindex].priority = editTaskPriority.value;
+                    projectsArray[saveTaskButton.dataset.projectindex].
+                    tasks[saveTaskButton.dataset.taskindex].notes = editTaskNotes.value;
+                    saveLocal();
+                    editTaskForm.hidden = true;
+                    populateTask();        
+                });
                 let taskPara = document.createElement("p");
                 let deleteTaskButton = document.createElement("button");
                 deleteTaskButton.innerHTML = "Delete Task";
                 let editTaskButton = document.createElement("button");
                 editTaskButton.innerHTML = "Edit Task";
-                taskPara.innerHTML += "<br>Task: " + task.title + "<br>" +
-                "Description: " + task.description  + "<br>" + 
-                "Due Date: " + task.dueDate  + "<br>" +
-                "Priority: " + task.priority + "<br>" + 
-                "Notes: " + task.notes + "<br>";
+                function populateTask() {
+                    taskPara.innerHTML = "<br>Task: " + task.title + "<br>" +
+                    "Description: " + task.description  + "<br>" + 
+                    "Due Date: " + task.dueDate  + "<br>" +
+                    "Priority: " + task.priority + "<br>" + 
+                    "Notes: " + task.notes + "<br>";
+                    // appending elements to their parents
+                    taskPara.append(editTaskButton, deleteTaskButton);
+                    taskDisplay.append(taskPara);
+                }
+                populateTask();
                 deleteTaskButton.setAttribute("data-index", project.tasks.indexOf(task));
                 // delete task button listener
                 deleteTaskButton.addEventListener("click", function() {
@@ -233,9 +239,6 @@ function populatePage() {
                     editTaskPriority.value = task.priority;
                     editTaskNotes.value = task.notes; 
                 })
-                // appending elements to their parents
-                taskPara.append(editTaskButton, deleteTaskButton);
-                taskDisplay.append(taskPara);
                 };
             });
             projectDisplay.append(projectPara, taskDisplay, showTasksButton,
