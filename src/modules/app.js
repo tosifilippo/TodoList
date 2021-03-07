@@ -68,6 +68,10 @@ createTaskButton.addEventListener("click", function addTask() {
         let taskNode = document.querySelectorAll(`[data-index="${createTaskButton.dataset.index}"]`);
         taskNode.forEach(element => {
             element.hidden = false;
+        });
+        let hideShowButtons = document.querySelectorAll('.show-task-button');
+        hideShowButtons.forEach(element => {
+            if (element.dataset.index === createTaskButton.dataset.index) element.click();
         });  
     };
 });
@@ -176,6 +180,8 @@ function populatePage() {
             taskDisplay.setAttribute("hidden", true);
             // creating a button to hide/show tasks
             let showTasksButton = document.createElement("button");
+            showTasksButton.classList.add("show-task-button");
+            showTasksButton.setAttribute("data-index", projectsArray.indexOf(project));
             showTasksButton.addEventListener("click", function() {
                 if (taskDisplay.hidden) {
                     taskDisplay.hidden = false;
