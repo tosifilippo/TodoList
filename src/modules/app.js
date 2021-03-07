@@ -228,7 +228,7 @@ function populatePage() {
                     function populateTask() {
                         taskPara.innerHTML = "<br>Task: " + task.title + "<br>" +
                         "Description: " + task.description  + "<br>" + 
-                        "Due Date: " + task.dueDate  + "<br>" +
+                        "Due Date: " + formatDistanceToNow(parseISO(task.dueDate), {addSuffix : true})  + "<br>" +
                         "Priority: " + task.priority + "<br>" + 
                         "Notes: " + task.notes + "<br>";
                         // appending elements to their parents
