@@ -37,6 +37,7 @@ h1 {
     border: 5px solid;
     padding: 5%;
     gap: 5%;
+    min-height: 70%;
 }
 
 .form-container {
@@ -56,6 +57,7 @@ input {
     font-family: 'Amatic SC';
     font-weight: 600;
     font-size: x-large;
+    min-height: 100%;
 }
 
 select {
@@ -63,6 +65,7 @@ select {
     font-family: 'Amatic SC';
     font-weight: 600;
     font-size: x-large;
+    min-height: 100%;
 }
 
 .save-button {
