@@ -14,7 +14,7 @@
         <form class="form">
             <input type="text" id="project-title" placeholder="title">
             <input type="text" id="project-description" placeholder="description">
-            <input type="date" id="project-due-date">
+            <input type="date" max="9999-12-31" id="project-due-date">
             <button id="add-project" type="button"  class="save-button">Save Project</button>
             <button id="x-project-form" type="button" class="cancel-button">Cancel</button>
         </form>
@@ -23,7 +23,7 @@
         <form class="form">
             <input type="text" id="edit-project-title" placeholder="title">
             <input type="text" id="edit-project-description" placeholder="description">
-            <input type="date" id="edit-project-due-date">
+            <input type="date" max="9999-12-31" id="edit-project-due-date">
             <button id="edit-project" type="button" class="save-button">Save Project</button>
             <button id="x-edit-project" type="button" class="cancel-button">Cancel</button>
         </form>
@@ -32,7 +32,7 @@
         <form class="form">
             <input type="text" id="task-title" placeholder="title">
             <input type="text" id="task-description" placeholder="description">
-            <input type="date" id="task-due-date">
+            <input type="date" max="9999-12-31" id="task-due-date">
             <select name="priority" id="task-priority">
                 <option disabled selected value> -- select priority -- </option>
                 <option value="Max">Max</option>
@@ -49,7 +49,7 @@
         <form class="form">
             <input type="text" id="edit-task-title" placeholder="title">
             <input type="text" id="edit-task-description" placeholder="description">
-            <input type="date" id="edit-task-due-date">
+            <input type="date" max="9999-12-31" id="edit-task-due-date">
             <select name="priority" id="edit-task-priority">
                 <option disabled selected value> -- select priority -- </option>
                 <option value="Max">Max</option>
