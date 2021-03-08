@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>ToDo List</title>
     <link rel="stylesheet" href="styles/global-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -12,8 +12,8 @@
     </header>
     <div id="add-project-form" class="form-container" hidden>
         <form class="form">
-            <input type="text" id="project-title" placeholder="title">
-            <input type="text" id="project-description" placeholder="description">
+            <input type="text" id="project-title" placeholder="Title">
+            <input type="text" id="project-description" placeholder="Description">
             <input type="date" max="9999-12-31" id="project-due-date">
             <button id="add-project" type="button"  class="save-button">Save Project</button>
             <button id="x-project-form" type="button" class="cancel-button">Cancel</button>
@@ -21,8 +21,8 @@
     </div>
     <div id="edit-project-form" class="form-container" hidden>
         <form class="form">
-            <input type="text" id="edit-project-title" placeholder="title">
-            <input type="text" id="edit-project-description" placeholder="description">
+            <input type="text" id="edit-project-title" placeholder="Title">
+            <input type="text" id="edit-project-description" placeholder="Description">
             <input type="date" max="9999-12-31" id="edit-project-due-date">
             <button id="edit-project" type="button" class="save-button">Save Project</button>
             <button id="x-edit-project" type="button" class="cancel-button">Cancel</button>
@@ -30,8 +30,8 @@
     </div>
     <div id="add-task-form" class="form-container" hidden>
         <form class="form">
-            <input type="text" id="task-title" placeholder="title">
-            <input type="text" id="task-description" placeholder="description">
+            <input type="text" id="task-title" placeholder="Title">
+            <input type="text" id="task-description" placeholder="Description">
             <input type="date" max="9999-12-31" id="task-due-date">
             <select name="priority" id="task-priority">
                 <option disabled selected value> -- select priority -- </option>
@@ -40,15 +40,15 @@
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
             </select>
-            <input type="text" id="task-notes" placeholder="notes">
+            <input type="text" id="task-notes" placeholder="Notes">
             <button id="add-task" type="button" class="save-button">Save Task</button>
             <button id="x-task-form" type="button" class="cancel-button">Cancel</button>
         </form>
     </div>
     <div id="edit-task-form" class="form-container" hidden>
         <form class="form">
-            <input type="text" id="edit-task-title" placeholder="title">
-            <input type="text" id="edit-task-description" placeholder="description">
+            <input type="text" id="edit-task-title" placeholder="Title">
+            <input type="text" id="edit-task-description" placeholder="Description">
             <input type="date" max="9999-12-31" id="edit-task-due-date">
             <select name="priority" id="edit-task-priority">
                 <option disabled selected value> -- select priority -- </option>
@@ -57,7 +57,7 @@
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
             </select>
-            <input type="text" id="edit-task-notes" placeholder="notes">
+            <input type="text" id="edit-task-notes" placeholder="Notes">
             <button id="edit-task" type="button" class="save-button">Save Task</button>
             <button id="x-edit-task" type="button" class="cancel-button">Cancel</button>
         </form>
