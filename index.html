@@ -12,7 +12,7 @@
     </header>
     <div id="add-project-form" class="form-container" hidden>
         <form class="form">
-            <input type="text" id="project-title" placeholder="Title">
+            <input type="text" id="project-title" maxlength="30" placeholder="Title">
             <input type="text" id="project-description" placeholder="Description">
             <input type="date" max="9999-12-31" id="project-due-date">
             <button id="add-project" type="button"  class="save-button">Save Project</button>
@@ -21,7 +21,7 @@
     </div>
     <div id="edit-project-form" class="form-container" hidden>
         <form class="form">
-            <input type="text" id="edit-project-title" placeholder="Title">
+            <input type="text" id="edit-project-title" maxlength="20" placeholder="Title">
             <input type="text" id="edit-project-description" placeholder="Description">
             <input type="date" max="9999-12-31" id="edit-project-due-date">
             <button id="edit-project" type="button" class="save-button">Save Project</button>
