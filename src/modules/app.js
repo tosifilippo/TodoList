@@ -115,7 +115,7 @@ function populatePage() {
         if (project != null) {
             // creating sidebar content
             let projectSidebar = document.createElement("button");
-            projectSidebar.innerHTML = project.title;
+            projectSidebar.innerHTML = project.title.toUpperCase() + "<br> Due " + formatDistanceToNow(parseISO(project.dueDate), {addSuffix:true} );
             projectSidebar.classList.add("sidebar-button");
             // sidebar listener
             projectSidebar.addEventListener("click", function() {
@@ -137,7 +137,7 @@ function populatePage() {
                 projectsArray[saveProjectButton.dataset.index].dueDate = editProjectDueDate.value;
                 saveLocal();
                 editProjectForm.hidden = true;
-                projectSidebar.innerHTML = project.title;
+                projectSidebar.innerHTML = project.title.toUpperCase() + "<br> Due " + formatDistanceToNow(parseISO(project.dueDate), {addSuffix:true} );
                 populatePara();
             });            
             let projectPara = document.createElement("p");
