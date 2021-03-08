@@ -1,7 +1,7 @@
 // imports
 import createProject from "./projects";
 import createTask from './tasks';
-import { parseISO, formatDistanceToNow } from 'date-fns';
+import { parseISO, formatDistanceToNow, isPast } from 'date-fns';
 // creating array to store projects
 let projectsArray = [];
 // targeting html elements
@@ -117,6 +117,12 @@ function populatePage() {
             let projectSidebar = document.createElement("button");
             projectSidebar.innerHTML = project.title.toUpperCase() + "<br> Due " + formatDistanceToNow(parseISO(project.dueDate), {addSuffix:true} );
             projectSidebar.classList.add("sidebar-button");
+            function checkPast() {
+                if (isPast(parseISO(project.dueDate))) {
+                    projectSidebar.classList.add("expired");
+                } else projectSidebar.classList.remove("expired");
+            };
+            checkPast();
             // sidebar listener
             projectSidebar.addEventListener("click", function() {
                 if (projectDisplay.hidden) {
@@ -139,6 +145,7 @@ function populatePage() {
                 editProjectForm.hidden = true;
                 projectSidebar.innerHTML = project.title.toUpperCase() + "<br> Due " + formatDistanceToNow(parseISO(project.dueDate), {addSuffix:true} );
                 populatePara();
+                checkPast();
             });            
             let projectPara = document.createElement("p");
             let deleteProjectButton = document.createElement("button");
@@ -220,6 +227,7 @@ function populatePage() {
                         populateTask();
                     });
                     let taskPara = document.createElement("p");
+                    taskPara.classList.add("task-para");
                     let deleteTaskButton = document.createElement("button");
                     deleteTaskButton.innerHTML = "Delete Task";
                     let editTaskButton = document.createElement("button");

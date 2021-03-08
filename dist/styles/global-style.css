@@ -37,7 +37,7 @@ h1 {
     border: 5px solid;
     padding: 5%;
     gap: 5%;
-    min-height: 70%;
+    min-height: 50%;
 }
 
 .form-container {
@@ -127,8 +127,8 @@ button {
     width: 70%;
 }
 
-p {
-    margin: 0;
+.task-para {
+    border: 1px solid gray;
 }
 
 .project-display {
@@ -144,3 +144,19 @@ p {
     position: absolute;
     width: 30%;
 }
+
+.expired {
+    border: 5px solid orangered;
+    text-decoration: underline;
+    text-decoration-color: orangered;
+    text-decoration-skip-ink: none;
+    text-decoration-style: double;
+    text-decoration-thickness: 2px;
+    animation: blinker 2.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
