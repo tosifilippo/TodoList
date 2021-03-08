@@ -50,7 +50,6 @@ addProjectButton.addEventListener("click", function addProject() {
         addProjectForm.hidden = true;
         populatePage();
         let projectNode = document.querySelectorAll(`[data-index="${projectsArray.length -1}"]`);
-        console.log(projectNode);
         projectNode.forEach(element => {
             element.hidden = false;
         });
@@ -72,8 +71,8 @@ createTaskButton.addEventListener("click", function addTask() {
         });
         let hideShowButtons = document.querySelectorAll('.show-task-button');
         hideShowButtons.forEach(element => {
-            if (element.dataset.index === createTaskButton.dataset.index) element.click();
-        });  
+            if (element.dataset.value === createTaskButton.dataset.index) element.click();
+        });
     };
 });
 // hides project form
@@ -182,7 +181,7 @@ function populatePage() {
             // creating a button to hide/show tasks
             let showTasksButton = document.createElement("button");
             showTasksButton.classList.add("show-task-button");
-            showTasksButton.setAttribute("data-index", projectsArray.indexOf(project));
+            showTasksButton.setAttribute("data-value", projectsArray.indexOf(project));
             showTasksButton.addEventListener("click", function() {
                 if (taskDisplay.hidden) {
                     taskDisplay.hidden = false;
@@ -218,7 +217,7 @@ function populatePage() {
                         tasks[saveTaskButton.dataset.taskindex].notes = editTaskNotes.value;
                         saveLocal();
                         editTaskForm.hidden = true;
-                        populateTask();        
+                        populateTask();
                     });
                     let taskPara = document.createElement("p");
                     let deleteTaskButton = document.createElement("button");
@@ -226,16 +225,18 @@ function populatePage() {
                     let editTaskButton = document.createElement("button");
                     editTaskButton.innerHTML = "Edit Task";
                     function populateTask() {
-                        taskPara.innerHTML = "<br>Task: " + task.title + "<br>" +
-                        "Description: " + task.description  + "<br>" + 
-                        "Due Date: " + formatDistanceToNow(parseISO(task.dueDate), {addSuffix : true})  + "<br>" +
-                        "Priority: " + task.priority + "<br>" + 
-                        "Notes: " + task.notes + "<br>";
-                        // appending elements to their parents
-                        taskPara.append(editTaskButton, deleteTaskButton);
-                        taskDisplay.append(taskPara);
-                    }
+                        if (task != null) {
+                            taskPara.innerHTML = "<br>Task: " + task.title + "<br>" +
+                            "Description: " + task.description  + "<br>" + 
+                            "Due Date: " + formatDistanceToNow(parseISO(task.dueDate), {addSuffix : true})  + "<br>" +
+                            "Priority: " + task.priority + "<br>" + 
+                            "Notes: " + task.notes + "<br>";
+                            // appending elements to their parents
+                            taskPara.append(editTaskButton, deleteTaskButton);
+                        };
+                    };
                     populateTask();
+                    taskDisplay.append(taskPara);
                     deleteTaskButton.setAttribute("data-index", project.tasks.indexOf(task));
                     // delete task button listener
                     deleteTaskButton.addEventListener("click", function() {
@@ -267,4 +268,3 @@ function populatePage() {
 // these run when page is loaded
 restoreLocal();
 populatePage();
-console.log(projectsArray);
