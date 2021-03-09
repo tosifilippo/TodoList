@@ -1,7 +1,7 @@
 // imports
+import { parseISO, formatDistanceToNow, isPast } from 'date-fns'
 import createProject from './projects'
 import createTask from './tasks'
-import { parseISO, formatDistanceToNow, isPast } from 'date-fns'
 // creating array to store projects
 let projectsArray = []
 // targeting html elements
@@ -38,11 +38,11 @@ const xEditTask = document.getElementById('x-edit-task')
 const sidebar = document.getElementById('sidebar-container')
 // event listeners for static buttons
 // shows project form
-showProjectFormButton.addEventListener('click', function showProjectForm () {
+showProjectFormButton.addEventListener('click', () => {
   addProjectForm.hidden = false
 })
 // creates project
-addProjectButton.addEventListener('click', function addProject () {
+addProjectButton.addEventListener('click', () => {
   if (projectTitle.value !== '' && projectDescription.value !== '' && projectDueDate.value !== '') {
     const newProject = createProject(projectTitle.value, projectDescription.value, projectDueDate.value)
     projectsArray.push(newProject)
@@ -50,13 +50,13 @@ addProjectButton.addEventListener('click', function addProject () {
     addProjectForm.hidden = true
     populatePage()
     const projectNode = document.querySelectorAll(`[data-index="${projectsArray.length - 1}"]`)
-    projectNode.forEach(element => {
+    projectNode.forEach((element) => {
       element.hidden = false
     })
-  };
+  }
 })
 // creates task
-createTaskButton.addEventListener('click', function addTask () {
+createTaskButton.addEventListener('click', () => {
   if (taskTitle.value !== '' && taskDescription.value !== '' && taskDueDate.value !== '' &&
     taskPriority.value !== '' && taskNotes.value !== '') {
     const newTask = createTask(taskTitle.value, taskDescription.value, taskDueDate.value,
@@ -66,28 +66,28 @@ createTaskButton.addEventListener('click', function addTask () {
     addTaskForm.hidden = true
     populatePage()
     const taskNode = document.querySelectorAll(`[data-index="${createTaskButton.dataset.index}"]`)
-    taskNode.forEach(element => {
+    taskNode.forEach((element) => {
       element.hidden = false
     })
     const hideShowButtons = document.querySelectorAll('.show-task-button')
-    hideShowButtons.forEach(element => {
+    hideShowButtons.forEach((element) => {
       if (element.dataset.value === createTaskButton.dataset.index) element.click()
     })
-  };
+  }
 })
 // hides project form
-xProjectForm.addEventListener('click', function hideProjectForm () {
+xProjectForm.addEventListener('click', () => {
   addProjectForm.hidden = true
   projectTitle.value = ''
   projectDescription.value = ''
   projectDueDate.value = ''
 })
 // hides edit project form
-xEditProject.addEventListener('click', function hideEditProject () {
+xEditProject.addEventListener('click', () => {
   editProjectForm.hidden = true
 })
 // hides task form
-xTaskForm.addEventListener('click', function hideTaskForm () {
+xTaskForm.addEventListener('click', () => {
   addTaskForm.hidden = true
   taskDescription.value = ''
   taskDueDate.value = ''
@@ -96,35 +96,35 @@ xTaskForm.addEventListener('click', function hideTaskForm () {
   taskTitle.value = ''
 })
 // hide edit task form
-xEditTask.addEventListener('click', function hideEditTask () {
+xEditTask.addEventListener('click', () => {
   editTaskForm.hidden = true
 })
 // local storage
 function saveLocal () {
   localStorage.setItem('projectsArray', JSON.stringify(projectsArray))
-};
+}
 function restoreLocal () {
   projectsArray = (JSON.parse(localStorage.getItem('projectsArray')))
-  if ((projectsArray === null) || (projectsArray.every(element => element === null))) projectsArray = []
-};
+  if ((projectsArray === null) || (projectsArray.every((element) => element === null))) projectsArray = []
+}
 // DOM manipulation
 function populatePage () {
   projectsContainer.innerHTML = ''
   sidebar.innerHTML = ''
-  projectsArray.forEach(project => {
+  projectsArray.forEach((project) => {
     if (project != null) {
       // creating sidebar content
       const projectSidebar = document.createElement('button')
-      projectSidebar.innerHTML = project.title.toUpperCase() + '<br> Due ' + formatDistanceToNow(parseISO(project.dueDate), { addSuffix: true })
+      projectSidebar.innerHTML = `${project.title.toUpperCase()}<br> Due ${formatDistanceToNow(parseISO(project.dueDate), { addSuffix: true })}`
       projectSidebar.classList.add('sidebar-button')
       function checkPast () {
         if (isPast(parseISO(project.dueDate))) {
           projectSidebar.classList.add('expired')
         } else projectSidebar.classList.remove('expired')
-      };
+      }
       checkPast()
       // sidebar listener
-      projectSidebar.addEventListener('click', function () {
+      projectSidebar.addEventListener('click', () => {
         if (projectDisplay.hidden) {
           projectDisplay.hidden = false
         } else {
@@ -137,28 +137,28 @@ function populatePage () {
       projectDisplay.setAttribute('data-index', projectsArray.indexOf(project))
       projectDisplay.setAttribute('class', 'project-display')
       // saves project edit
-      saveProjectButton.addEventListener('click', function editProject () {
+      saveProjectButton.addEventListener('click', () => {
         projectsArray[saveProjectButton.dataset.index].title = editProjectTitle.value
         projectsArray[saveProjectButton.dataset.index].description = editProjectDescription.value
         projectsArray[saveProjectButton.dataset.index].dueDate = editProjectDueDate.value
         saveLocal()
         editProjectForm.hidden = true
-        projectSidebar.innerHTML = project.title.toUpperCase() + '<br> Due ' + formatDistanceToNow(parseISO(project.dueDate), { addSuffix: true })
+        projectSidebar.innerHTML = `${project.title.toUpperCase()}<br> Due ${formatDistanceToNow(parseISO(project.dueDate), { addSuffix: true })}`
         populatePara()
         checkPast()
       })
       const projectPara = document.createElement('p')
       const deleteProjectButton = document.createElement('button')
       function populatePara () {
-        projectPara.innerHTML = '<br>Project: ' + project.title + '<br>' +
-            'Description: ' + project.description + '<br>' +
-            'Due Date: ' + formatDistanceToNow(parseISO(project.dueDate), { addSuffix: true })
-      };
+        projectPara.innerHTML = `<br>Project: ${project.title}<br>` +
+            `Description: ${project.description}<br>` +
+            `Due Date: ${formatDistanceToNow(parseISO(project.dueDate), { addSuffix: true })}`
+      }
       populatePara()
       deleteProjectButton.innerText = 'Delete Project'
       deleteProjectButton.setAttribute('data-index', projectsArray.indexOf(project))
       // delete project button listener
-      deleteProjectButton.addEventListener('click', function () {
+      deleteProjectButton.addEventListener('click', () => {
         delete projectsArray[deleteProjectButton.dataset.index]
         saveLocal()
         projectsContainer.removeChild(projectDisplay)
@@ -168,7 +168,7 @@ function populatePage () {
       const editProjectButton = document.createElement('button')
       editProjectButton.innerHTML = 'Edit Project'
       // edit project button listener
-      editProjectButton.addEventListener('click', function () {
+      editProjectButton.addEventListener('click', () => {
         editProjectForm.hidden = false
         saveProjectButton.setAttribute('data-index', projectsArray.indexOf(project))
         editProjectTitle.value = project.title
@@ -178,7 +178,7 @@ function populatePage () {
       // creating button to prompt new task form
       const showTaskFormButton = document.createElement('button')
       showTaskFormButton.innerHTML = 'Add Task'
-      showTaskFormButton.addEventListener('click', function () {
+      showTaskFormButton.addEventListener('click', () => {
         addTaskForm.hidden = false
         createTaskButton.setAttribute('data-index', projectsArray.indexOf(project))
       })
@@ -189,29 +189,29 @@ function populatePage () {
       const showTasksButton = document.createElement('button')
       showTasksButton.classList.add('show-task-button')
       showTasksButton.setAttribute('data-value', projectsArray.indexOf(project))
-      showTasksButton.addEventListener('click', function () {
+      showTasksButton.addEventListener('click', () => {
         if (taskDisplay.hidden) {
           taskDisplay.hidden = false
           showTasksButton.innerHTML = 'Hide Tasks'
         } else {
           taskDisplay.hidden = true
           showTasksButton.innerHTML = 'Show Tasks'
-        };
+        }
       })
       showTasksButton.innerHTML = 'Show Tasks'
       // makes sure hide/show button is only visible if the
       // project actually has tasks
       function checkTasks () {
-        if (project.tasks.every(element => element === null)) {
+        if (project.tasks.every((element) => element === null)) {
           showTasksButton.setAttribute('hidden', true)
-        };
-      };
+        }
+      }
       checkTasks()
       // looping through each project and displaying its tasks
-      project.tasks.forEach(task => {
+      project.tasks.forEach((task) => {
         if (task != null) {
           // saves task edit
-          saveTaskButton.addEventListener('click', function editTask () {
+          saveTaskButton.addEventListener('click', () => {
             projectsArray[saveTaskButton.dataset.projectindex]
               .tasks[saveTaskButton.dataset.taskindex].title = editTaskTitle.value
             projectsArray[saveTaskButton.dataset.projectindex]
@@ -234,27 +234,27 @@ function populatePage () {
           editTaskButton.innerHTML = 'Edit Task'
           function populateTask () {
             if (task != null) {
-              taskPara.innerHTML = '<br>Task: ' + task.title + '<br>' +
-                            'Description: ' + task.description + '<br>' +
-                            'Due Date: ' + formatDistanceToNow(parseISO(task.dueDate), { addSuffix: true }) + '<br>' +
-                            'Priority: ' + task.priority + '<br>' +
-                            'Notes: ' + task.notes + '<br>'
+              taskPara.innerHTML = `<br>Task: ${task.title}<br>` +
+                            `Description: ${task.description}<br>` +
+                            `Due Date: ${formatDistanceToNow(parseISO(task.dueDate), { addSuffix: true })}<br>` +
+                            `Priority: ${task.priority}<br>` +
+                            `Notes: ${task.notes}<br>`
               // appending elements to their parents
               taskPara.append(editTaskButton, deleteTaskButton)
-            };
-          };
+            }
+          }
           populateTask()
           taskDisplay.append(taskPara)
           deleteTaskButton.setAttribute('data-index', project.tasks.indexOf(task))
           // delete task button listener
-          deleteTaskButton.addEventListener('click', function () {
+          deleteTaskButton.addEventListener('click', () => {
             delete project.tasks[deleteTaskButton.dataset.index]
             checkTasks()
             saveLocal()
             taskDisplay.removeChild(taskPara)
           })
           // edit task button listener
-          editTaskButton.addEventListener('click', function () {
+          editTaskButton.addEventListener('click', () => {
             editTaskForm.hidden = false
             saveTaskButton.setAttribute('data-projectindex', projectsArray.indexOf(project))
             saveTaskButton.setAttribute('data-taskindex', project.tasks.indexOf(task))
@@ -264,15 +264,15 @@ function populatePage () {
             editTaskPriority.value = task.priority
             editTaskNotes.value = task.notes
           })
-        };
+        }
       })
       projectDisplay.append(projectPara, taskDisplay, showTasksButton,
         showTaskFormButton, editProjectButton, deleteProjectButton)
       projectsContainer.appendChild(projectDisplay)
       sidebar.appendChild(projectSidebar)
-    };
+    }
   })
-};
+}
 // these run when page is loaded
 restoreLocal()
 populatePage()
