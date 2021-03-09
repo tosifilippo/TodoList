@@ -1,2 +1,2 @@
-import showProjectForm from './modules/app.js';
-import addProject from './modules/app.js';
+/* eslint-disable no-unused-vars */
+import { showProjectForm, addProject } from './modules/app.js'
